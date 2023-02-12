@@ -1,0 +1,37 @@
+<div class=conteiner>
+<table *ngIf='hasLoaded; isLoading'>
+    <tr class="thead">
+        <h2>{{city.name}}, {{city.country}}</h2>
+        <div class="fav grow">
+            <span (click)="toggleFav(city.key)">
+                <mat-icon *ngIf="!city.isFav; else isFav" matTooltip="Add to Favorites" color="warn">favorite_border</mat-icon>
+            </span>
+            <ng-template #isFav>
+                <mat-icon matTooltip="Remove from Favorites" color="warn">favorite</mat-icon>
+            </ng-template>
+        </div>
+    </tr>
+    <tr class="body">
+        <td class="date">
+            <p>{{currWeather.localTime | date: 'EEEE, MMMM d, y'}}</p>
+            <p>{{currWeather.localTime | date: 'H:mm (zzzz)'}}</p>
+        </td>
+        <td class="img">
+            <img mat-card-image [src]="currWeather.icon.url | weatherIcon" [alt]="currWeather.icon.text">
+        </td>
+        <td class="txt">
+            <p *ngIf="isCelsius; else isFahr">
+                {{currWeather.temperature.metric}} {{CEL_UNIT}}
+            </p> 
+            <ng-template #isFahr>
+                <p>{{currWeather.temperature.imperial}} {{FAR_UNIT}}</p>
+            </ng-template> 
+            <p>{{currWeather.icon.text}}</p>
+        </td>
+    </tr>
+</table>
+<ng-template #isLoading>
+    <mat-spinner></mat-spinner>>
+</ng-template>
+<mat-divider></mat-divider>
+</div>

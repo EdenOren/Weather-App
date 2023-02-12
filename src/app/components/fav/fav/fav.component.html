@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="title">
+        <h2><mat-icon>favorite</mat-icon>Favorite Locations</h2>
+    </div>
+    <div class="content" *ngIf="favorites && favorites[0];else noFavorites">
+        <div class="btn">
+            <button mat-raised-button (click)="removeFavorites()" color="warn">Clear Favorites</button>
+        </div>
+        <div class="favorites" *ngFor="let item of favorites">
+            <app-current [city]="item.city"></app-current>
+            <a><mat-icon color="warn">zoom_out_map</mat-icon></a>
+        </div>
+    </div>
+    <ng-template #noFavorites>
+        <div class="content">
+            <button mat-raised-button routerLink="/home" color="warn">Home</button>
+            No favorite locations saved yet.
+        </div>
+    </ng-template>
+</div>
+

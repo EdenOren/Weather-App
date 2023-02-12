@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="forecast" *ngIf='hasLoaded; isLoading'>
+        <mat-card *ngFor="let forecast of foreWeather" class="grow">
+            <mat-card-header>
+                <mat-card-title>
+                    {{forecast.date | date: 'EEEE'}}<br>
+                    {{forecast.date | date: 'dd/MM'}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+                <p class="txt">{{forecast.day.text}}</p>
+                <p class="temp">
+                    {{isCelsius? ((forecast.temperature.maxVal | temperature: CEL_UNIT) + CEL_UNIT)
+                    : ((forecast.temperature.maxVal) + FAR_UNIT)}} 
+                </p>
+                <img mat-card-image [src]="forecast.day.url | weatherIcon" [alt]="forecast.day.text">
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+                <p class="txt">{{forecast.night.text}}</p>
+                <p class="temp">
+                    {{isCelsius? ((forecast.temperature.minVal | temperature: CEL_UNIT) + CEL_UNIT)
+                    : ((forecast.temperature.minVal) + FAR_UNIT)}} 
+                </p>
+                <img mat-card-image [src]="forecast.night.url | weatherIcon" [alt]="forecast.night.text">
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<ng-template #isLoading>
+    <mat-spinner></mat-spinner>>
+</ng-template>

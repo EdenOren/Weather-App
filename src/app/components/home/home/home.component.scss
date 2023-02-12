@@ -1,0 +1,76 @@
+.container{
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas:
+    "title title ."
+    ". find ."
+    ". weather .";
+}
+.title{
+    margin-top: 1rem;
+    grid-area: title;
+    display: flex;
+    justify-content: space-between;
+    h2{
+        font-size: 20px;
+        display: flex;
+        align-items: flex-start;
+        mat-icon{ //animaton
+            position: relative;
+            top:3px; bottom:0; left:0;right:5px;
+            animation: circle 1s linear 1;
+            color: var(--base-color);
+        }
+    }
+    div{
+        font-size: 14px;
+        margin-top: 4px;
+        display: flex;
+        mat-icon{
+            color: var(--base-color);
+        }
+    }
+}
+.find{
+    grid-area: find;
+    display: flex;
+    justify-content: center;
+    mat-form-field{
+        width: 70%;
+        input{
+            color: var(--text-color);
+        }
+    }
+}
+
+app-weather{ grid-area: weather;}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        padding: 1rem;
+    }
+    .title{
+        h2{
+            font-size: 16px;
+        }
+        div{
+            font-size: 12px;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .container{
+        padding: 0 1rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr auto;
+        grid-template-areas:
+        "title"
+        "find"
+        "weather";
+    }
+}
+
+@media only screen and (max-width: 1200px) {}

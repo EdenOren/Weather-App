@@ -1,0 +1,40 @@
+<div class="container">
+    <!-- title area -->
+    <div class="title">
+        <h2><mat-icon>search</mat-icon>Search Locations</h2>
+        <div *ngIf="getUserLocation()"><mat-icon>location_on</mat-icon>{{getUserLocation()}}</div>
+    </div>
+
+
+    <div class="find" spellcheck="false">
+        <!-- search form -->
+        <mat-form-field appearance="outline">
+
+            <mat-label>Enter City Name</mat-label>
+            <input matInput #inputCity type="text" [matAutocomplete]="auto" 
+            [formControl]="inputSearch" [value]="inputValue">
+
+                <button *ngIf="inputCity.value" matSuffix mat-icon-button 
+                (click)="inputCity.value = ''" matTooltip="Clear search">
+                    <mat-icon>close</mat-icon>
+                </button>
+
+            <mat-hint align="end" [ngStyle]="{color: 'gray'}">Minimum 3 characters</mat-hint>
+        </mat-form-field>
+
+        <!-- auto complete -->
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayAuto" (optionSelected)="onSelected()" 
+        autoActiveFirstOption>
+            <ng-container>
+                <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                    <span [innerHTML]="city.LocalizedName | highlight: matchHighlight"></span>
+                    , {{city.Country.LocalizedName}} ({{city.AdministrativeArea.LocalizedName}})
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>        
+    </div>
+
+    <!-- weather-area -->
+    <app-weather [showCity]="selection"></app-weather>
+</div>
+

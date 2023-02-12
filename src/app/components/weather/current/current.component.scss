@@ -1,0 +1,69 @@
+.container{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+table, ng-template{
+    margin: auto;
+}
+.thead{
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    h2{
+        padding-right: 1rem;
+    }
+    mat-icon:hover{
+        cursor: pointer;
+    }
+}
+tr{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+td{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}    
+.date{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 16px;
+}
+.txt{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+}
+.img{
+    margin:auto;
+}
+img{
+    width: 155px;
+}    
+
+@media only screen and (max-width: 600px) {
+    .thead{
+        h2{
+            font-size: 16px;
+        }
+    }
+    img{
+        width: 115px;
+        margin: 0;
+    }
+    .date{
+        font-size: 12px;
+    }
+    .txt{
+        font-size: 14px;
+    } 
+}
+@media only screen and (max-width: 800px) {
+    img{
+        width: 135px;
+    } 
+}
