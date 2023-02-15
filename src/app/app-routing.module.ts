@@ -5,8 +5,9 @@ import { HomeComponent } from './components/home/home/home.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
+  { path: "home/:id", component: HomeComponent },
   { path: "fav", component: FavComponent  },
-  // { path: "**", redirectTo:"home", pathMatch: "full"},
+  { path: "**", redirectTo: "home" }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

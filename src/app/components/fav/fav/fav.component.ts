@@ -9,14 +9,25 @@ import { ModesService } from 'src/app/services/modes.service'
   styleUrls: ['./fav.component.scss']
 })
 export class FavComponent {
-  favorites: Array<{id: number, city: City}> = [];
+  favorites: Array<{city: City}> = [];
   isCelsius!: boolean;
 
   constructor(private favService: FavoritesService, private mode: ModesService) {
     this.favorites = this.favService.getFavorites();
     this.isCelsius = this.mode.getTemp();
   }
-  removeFavorites() {
+  /**
+   * remove city from favorites by given city
+   * @param {City} city city to be removed
+   */
+  removeFavorite(city: City) {
+    this.favService.removeFavorite(city);
+    this.favorites = this.favService.getFavorites();
+  }
+  /**
+   * clear all favorites
+   */
+  removeAllFavorites() {
     this.favService.removeAllFavorites();
     this.favorites = [];
   }

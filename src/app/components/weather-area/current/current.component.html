@@ -2,14 +2,6 @@
 <table *ngIf='hasLoaded; isLoading'>
     <tr class="thead">
         <h2>{{city.name}}, {{city.country}}</h2>
-        <div class="fav grow">
-            <span (click)="toggleFav(city.key)">
-                <mat-icon *ngIf="!city.isFav; else isFav" matTooltip="Add to Favorites" color="warn">favorite_border</mat-icon>
-            </span>
-            <ng-template #isFav>
-                <mat-icon matTooltip="Remove from Favorites" color="warn">favorite</mat-icon>
-            </ng-template>
-        </div>
     </tr>
     <tr class="body">
         <td class="date">

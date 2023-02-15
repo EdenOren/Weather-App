@@ -38,7 +38,7 @@
     display: flex;
     justify-content: center;
     mat-form-field{
-        width: 70%;
+        width: 80% !important;
         input{
             color: var(--text-color);
         }

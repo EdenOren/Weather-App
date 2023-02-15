@@ -38,6 +38,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    p{
+        margin-right: 1rem;
+        font-size: 14px;
+    }
+    mat-icon:hover{
+        cursor: pointer;
+    }
 }
 button{
     margin-bottom: 1rem;

@@ -34,7 +34,7 @@ export class CurrentComponent {
   ngOnChanges() {
     if (typeof this.city != 'undefined' ) {
       this.getWeathers();
-      this.city.isFav = this.favService.isFavorite(this.city);
+      this.city.isFav = (this.favService.getFavId(this.city) != null)? true : false;
     }
   }
   ngAfterContentChecked() {
@@ -74,14 +74,4 @@ export class CurrentComponent {
     this.hasLoaded = true;
   }
 
-  toggleFav(key: number) {
-    if (this.city.key === key) {
-      this.city.isFav = !this.city.isFav;
-      if (this.city.isFav) {
-        this.favService.addFavorite(this.city);
-      } else {
-        this.favService.removeFavorite(this.city);
-      }
-    }
-  }
 }

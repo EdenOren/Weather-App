@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { lastValueFrom, Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, switchMap, takeUntil } from "rxjs/operators";
@@ -12,7 +12,7 @@ import { MIN_INPUT_CITY_NAME, DEFAULT_LAT, DEFAULT_LNG, TIMEOUT_LOCATION, DEBOUN
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent{
   filteredCities: Observable<any[]> = new Observable<any[]>
   inputSearch: FormControl = new FormControl('', {nonNullable: true});
   noteLeave = new Subject();
@@ -22,12 +22,11 @@ export class HomeComponent implements OnInit, OnDestroy{
   matchHighlight: string = '';  //matching text to hightlight drop-down
   selection!: City;             //selected city
 
-  constructor(private appServ: AppService) { };
-
-  ngOnInit() {
+  constructor(private appServ: AppService) {
     this.getCurrentLocation();
     this.filterCities();
-  }
+  };
+
   ngOnDestroy() {
     this.noteLeave.complete() // clear observable
 }
@@ -80,11 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   //set selected location
   private setSelection(data: any) {
-    this.selection = new City(
-      data.ParentCity.Key,
-      data.ParentCity.LocalizedName,
-      data.Country.LocalizedName
-    );
+    this.selection = new City(data);
     if (!localStorage.getItem('user-location')) {
       localStorage.setItem('user-location',JSON.stringify(this.selection));
     }

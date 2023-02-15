@@ -1,0 +1,30 @@
+<div class="container" *ngIf="showCity && !cityNotFound">
+    <!-- add/remove to/from favorites section-->
+    <div class="fav grow">
+        <span (click)="toggleFav(showCity)">
+            <mat-icon *ngIf="!showCity.isFav; else isFav" matTooltip="Add {{showCity.name}} to Favorites" color="warn">
+                favorite_border
+            </mat-icon>
+        </span>
+        <ng-template #isFav>
+            <mat-icon matTooltip="Remove {{showCity.name}} from Favorites" color="warn">favorite</mat-icon>
+        </ng-template>
+    </div>
+    <!-- current weather section-->
+    <app-current [city]="showCity">
+    </app-current>
+    <!-- forecast weather section-->
+    <app-forecast [city]="showCity">
+    </app-forecast>
+</div>
+
+<div class="container" *ngIf="cityNotFound">
+    <span style="padding-top: 1rem;">Favorite city not found.</span>
+</div>
+
+<br><br>
+<ul>
+    <li>error handle taost</li>
+    <li>lazy loading</li>
+    <li>observable directly</li>
+</ul>

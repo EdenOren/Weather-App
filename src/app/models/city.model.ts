@@ -3,10 +3,10 @@ export class City {
     name: string;
     country: string;
     isFav: boolean
-    constructor(_key: number, _name: string, _country: string) {
-        this.key = _key;
-        this.name = _name;
-        this.country = _country;
+    constructor(data: any) {
+        this.key = data.ParentCity.Key
+        this.name = data.ParentCity.LocalizedName
+        this.country = data.Country.LocalizedName
         this.isFav = false;
     }
 }

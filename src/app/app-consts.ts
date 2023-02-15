@@ -20,7 +20,6 @@ export const DEFAULT_THEME = LIGHT_THEME;
 export const CEL_UNIT = 'metric'
 export const FAR_UNIT = 'imperial'
 export const DEFAULT_UNIT = CEL_UNIT;
-
 export const FAR_UNIT_DISP = 'F'
 export const CEL_UNIT_DISP = 'C'
 
@@ -28,5 +27,4 @@ export const TIMEOUT_LOCATION = 4000;
 export const DEBOUNCE_TIME_AUTO_COMPLETE = 500;
 
 export const FORECAST_DAYS = 5;
-
 export const FAVORITES = 'favorites';

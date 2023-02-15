@@ -9,9 +9,9 @@ import { LayoutComponent } from './components/layout-area/layout/layout.componen
 import { HeaderComponent } from './components/layout-area/header/header.component';
 import { FavComponent } from './components/fav/fav/fav.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { WeatherComponent } from './components/weather/weather/weather.component';
-import { CurrentComponent } from './components/weather/current/current.component';
-import { ForecastComponent } from './components/weather/forecast/forecast.component';
+import { WeatherComponent } from './components/weather-area/weather/weather.component';
+import { CurrentComponent } from './components/weather-area/current/current.component';
+import { ForecastComponent } from './components/weather-area/forecast/forecast.component';
 
 import { DatePipe } from '@angular/common';
 import { HighlightPipe } from './pipes/highlight.pipe';
@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+
 
 
 

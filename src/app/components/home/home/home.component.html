@@ -5,19 +5,19 @@
         <div *ngIf="getUserLocation()"><mat-icon>location_on</mat-icon>{{getUserLocation()}}</div>
     </div>
 
-
     <div class="find" spellcheck="false">
         <!-- search form -->
         <mat-form-field appearance="outline">
-
             <mat-label>Enter City Name</mat-label>
-            <input matInput #inputCity type="text" [matAutocomplete]="auto" 
-            [formControl]="inputSearch" [value]="inputValue">
-
-                <button *ngIf="inputCity.value" matSuffix mat-icon-button 
-                (click)="inputCity.value = ''" matTooltip="Clear search">
-                    <mat-icon>close</mat-icon>
-                </button>
+            <a routerLink="/home">
+                <input matInput #inputCity type="text" [matAutocomplete]="auto" 
+                [formControl]="inputSearch" [value]="inputValue">
+            </a>
+            
+            <button *ngIf="inputCity.value" matSuffix mat-icon-button 
+            (click)="inputCity.value = ''" matTooltip="Clear search">
+                <mat-icon>close</mat-icon>
+            </button>
 
             <mat-hint align="end" [ngStyle]="{color: 'gray'}">Minimum 3 characters</mat-hint>
         </mat-form-field>
@@ -35,6 +35,6 @@
     </div>
 
     <!-- weather-area -->
-    <app-weather [showCity]="selection"></app-weather>
+    <app-weather [inputCity]="selection"></app-weather>
 </div>
 

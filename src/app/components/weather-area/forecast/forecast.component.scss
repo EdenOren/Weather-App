@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 mat-card{
-    width: 220px;
+    width: 200px;
     aspect-ratio: 2 / 4;
     margin: 0.5rem;
 }
@@ -48,7 +48,10 @@ img{
 
 @media only screen and (max-width: 600px) {
     mat-card{
-        width: 200px;
+        width: 140px;
+    }
+    img{
+        width: 60px;
     }
 }
 
@@ -57,11 +60,10 @@ img{
         margin-top: 0.5rem;
     }
     mat-card{
-        width: 300px;
-        font-size:x-large;
+        width: 180px;
     }
     img{
-        width: 120px;
+        width: 80px;
     }
     .forecast{
         flex-direction: column;
@@ -82,6 +84,12 @@ img{
         flex-direction: row;
         justify-content: center;
         align-items: center;
+    }
+    mat-card{
+        width: 190px;
+    }
+    img{
+        width: 90px;
     }
 
 }
