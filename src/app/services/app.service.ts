@@ -19,6 +19,7 @@ export interface getRequestParams {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AppService{
   constructor(private http:HttpClient) { }
 
@@ -34,9 +35,8 @@ export class AppService{
       
     //add citykey if exist
     const cityKey = (reqPar._cityKey? reqPar._cityKey : ''); 
-
-    return this.http.get(reqPar._url + cityKey, {params})
-      .pipe(shareReplay()); //save data to cache
+    
+    return this.http.get(reqPar._url + cityKey, {params}).pipe(shareReplay());
   }
   /**
    * get location data from api based on given coordinates

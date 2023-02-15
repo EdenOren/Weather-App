@@ -9,7 +9,7 @@
             <p>{{currWeather.localTime | date: 'H:mm (zzzz)'}}</p>
         </td>
         <td class="img">
-            <img mat-card-image [src]="currWeather.icon.url | weatherIcon" [alt]="currWeather.icon.text">
+            <img [src]="currWeather.icon.url | weatherIcon" [alt]="currWeather.icon.text">
         </td>
         <td class="txt">
             <p *ngIf="isCelsius; else isFahr">

@@ -4,8 +4,8 @@ export class City {
     country: string;
     isFav: boolean
     constructor(data: any) {
-        this.key = data.ParentCity.Key
-        this.name = data.ParentCity.LocalizedName
+        this.key = data.Key
+        this.name = data.AdministrativeArea.LocalizedName
         this.country = data.Country.LocalizedName
         this.isFav = false;
     }
