@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { City } from 'src/app/models/city.model';
 import { ForecastWeather } from 'src/app/models/weather.model';
 import { CEL_UNIT_DISP, FAR_UNIT_DISP, FORECAST_DAYS } from 'src/app/app-consts';
-import { FavoritesService } from 'src/app/services/favorites.service';
 import { AppService } from 'src/app/services/app.service';
 import { ModesService } from 'src/app/services/modes.service';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-forecast',
@@ -17,16 +17,13 @@ export class ForecastComponent {
   
   isCelsius!: boolean;
   hasLoaded!: boolean;
+  forecast$!: Observable<ForecastWeather>;
   foreWeather:ForecastWeather[] = []; // each element represents forecsat for the next 5 days
 
   readonly FAR_UNIT = FAR_UNIT_DISP;
   readonly CEL_UNIT = CEL_UNIT_DISP;
 
-  constructor(
-    private favService: FavoritesService,
-    private appServ: AppService,
-    private mode: ModesService
-  ) { }
+  constructor(private appServ: AppService, private mode: ModesService) { }
 
   ngOnInit() {
     this.hasLoaded = false;
@@ -39,8 +36,9 @@ export class ForecastComponent {
   ngAfterContentChecked() {
     this.isCelsius = this.mode.getTemp();
   }
-  
   getWeathers() {
+    this.forecast$ = this.appServ.get5DaysForecasts(this.city.key);
+    
     this.get5DaysWeather()
     .then((res) =>{
       this.set5DaysWeather(res);
@@ -58,24 +56,11 @@ export class ForecastComponent {
       return err;
     }
   }
-
+// 
   set5DaysWeather(data:any) {
     for (let i = 0; i < FORECAST_DAYS; i++) {
-      this.foreWeather[i] = new ForecastWeather; 
-      this.foreWeather[i] = {
-        date: data.DailyForecasts[i].Date,
-        temperature: {
-          minVal: data.DailyForecasts[i].Temperature.Minimum.Value,
-          maxVal: data.DailyForecasts[i].Temperature.Maximum.Value,
-        },
-        day: {
-          url: data.DailyForecasts[i].Day.Icon,
-          text: data.DailyForecasts[i].Day.IconPhrase,
-        },
-        night: {
-          url: data.DailyForecasts[i].Night.Icon,
-          text: data.DailyForecasts[i].Night.IconPhrase,
-        }}}
+      this.foreWeather[i] = new ForecastWeather(data.DailyForecasts[i]); 
+    }
     this.hasLoaded = true;
   }
 }

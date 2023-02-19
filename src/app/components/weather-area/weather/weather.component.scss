@@ -3,9 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: larger;
+    width: 80%;
+    margin: auto;
 }
 
 mat-icon:hover{
     cursor: pointer;
 }
+

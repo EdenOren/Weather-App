@@ -1,13 +1,6 @@
 <div class="container dark-theme">
-    
-    <div class="logo">
-        <a routerLink="/home"><img src={{logo}}></a>
-    </div>
-
-    <div class="title">
-        <a routerLink="/home"><h1>{{title}}</h1></a>
-    </div>
-
+    <div class="logo"><a routerLink="/home"><img src={{logo}}></a></div>
+    <div class="title"><a routerLink="/home"><h1>{{title}}</h1></a></div>
     <div class="links">
         <a mat-button routerLinkActive #home="routerLinkActive" routerLink="/home" 
         [color]="home.isActive? 'warn' : 'inherit'">
@@ -32,5 +25,4 @@
             </button>
         </ng-template>
     </div>
-
 </div>

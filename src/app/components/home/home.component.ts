@@ -1,10 +1,11 @@
 import { Component, OnInit} from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { debounceTime, distinctUntilChanged, filter, switchMap } from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, filter, switchMap, take, timeout } from "rxjs/operators";
 import { City } from "src/app/models/city.model";
 import { AppService } from "src/app/services/app.service";
 import { MIN_INPUT_CITY_NAME, DEFAULT_LAT, DEFAULT_LNG, TIMEOUT_LOCATION, DEBOUNCE_TIME_AUTO_COMPLETE } from "src/app/app-consts";
-import { FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,9 @@ export class HomeComponent implements OnInit {
   inputSearch: FormControl = new FormControl('', {nonNullable: true});
   
   filterCities$!: Observable<any>;
-  currentLocation$!: Observable<any>;
+  currentLocation$!: Observable<City>;
 
-  constructor(private appServ: AppService) { };
+  constructor(private appServ: AppService, private router: Router) { };
 
   ngOnInit() {
     this.getCurrentLocation();
@@ -66,12 +67,19 @@ export class HomeComponent implements OnInit {
       this.currentLocation$ = this.appServ.getLocation(DEFAULT_LAT, DEFAULT_LNG);
     }
   }
-
   /**
-   * set selected city from dropdown selection
-   * set input accordingly
+   * navigate to given route address
+   * @param {string} route given route address
    */
-  onSelected() {
+  changeRoute(route: string) {
+    if (this.router.url != route) {
+      this.router.navigate(['/' + route]);
+    }
+  }
+  /**
+   * set and display selected city from dropdown selection
+   */
+  displaySelected() {
     this.selectedCity = new City(this.inputSearch.value);
     this.matchHighlight = this.selectedCity.name;
     this.inputValue = this.displayAuto(this.selectedCity);

@@ -10,7 +10,7 @@ export class FavoritesService {
   myFavorites:Array<{city: City}> = [];
   constructor() { }
   /**
-   * get favorites array as city structure from local storage
+   * return favorites array as city structure from local storage
    * @returns {Array{city:City}} return array of favorite cities, null otherwise
    */
   getFavorites(): Array<{city: City}> {
@@ -20,25 +20,27 @@ export class FavoritesService {
     return (favObj);
   }
   /**
-   * get favorites id by given city
+   * return favorites id by given city
    * @param {City} city city structure to search
    * @returns {number | null} return favorite id if city exists in favorites, null otherwise
    */
   getFavId(city: City): number | null {
     let res = null;
-    
-    this.getFavorites().forEach((element, i) => {
-      if (element.city.key === city.key) { 
-        res = i;
-      }
-    });
-    
+    let favObj = this.getFavorites();
+
+    if (favObj != null) {
+      favObj.forEach((element, i) => {
+        if (element.city.key === city.key) { 
+          res = i;
+        }
+      });
+    }
     return res;
   }
   /**
-   * get city structure by given favorite id
+   * return city by given favorite id
    * @param {string} id favorite id to search for
-   * @returns {City | null} return city structure, null if id not found
+   * @returns {City | null} return city, null if id not found
    */
   getFavCity(id: string | null): City | null {
     let favObj = this.getFavorites();

@@ -1,7 +1,7 @@
-export const API_KEY = 'dAUBWodgEZA5Qa5vAHBgqrDg0qr8GKMS';
-// GqPl8A6GYeygyiHg4PWldUNp7bF8tzqB - 1
-// dAUBWodgEZA5Qa5vAHBgqrDg0qr8GKMS - 0
-// nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj - 2
+export const API_KEY = 'nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj';
+// GqPl8A6GYeygyiHg4PWldUNp7bF8tzqB - 0
+// dAUBWodgEZA5Qa5vAHBgqrDg0qr8GKMS - 2
+// nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj - 1
 export const URL_LOCATION = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
 export const URL_AUTOCOMPLETE = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete';
 export const URL_CURRENT_WEATHER = 'http://dataservice.accuweather.com/currentconditions/v1/';

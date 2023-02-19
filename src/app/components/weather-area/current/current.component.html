@@ -1,29 +1,31 @@
-<div class=conteiner>
-<table *ngIf='hasLoaded; isLoading'>
-    <tr class="thead">
-        <h2>{{city.name}}, {{city.country}}</h2>
-    </tr>
-    <tr class="body">
-        <td class="date">
-            <p>{{currWeather.localTime | date: 'EEEE, MMMM d, y'}}</p>
-            <p>{{currWeather.localTime | date: 'H:mm (zzzz)'}}</p>
-        </td>
-        <td class="img">
-            <img [src]="currWeather.icon.url | weatherIcon" [alt]="currWeather.icon.text">
-        </td>
-        <td class="txt">
-            <p *ngIf="isCelsius; else isFahr">
-                {{currWeather.temperature.metric}} {{CEL_UNIT}}
-            </p> 
-            <ng-template #isFahr>
-                <p>{{currWeather.temperature.imperial}} {{FAR_UNIT}}</p>
-            </ng-template> 
-            <p>{{currWeather.icon.text}}</p>
-        </td>
-    </tr>
-</table>
-<ng-template #isLoading>
-    <mat-spinner></mat-spinner>>
-</ng-template>
-<mat-divider></mat-divider>
+<div class="container" *ngIf="currWeather$ | async as currWeather; isLoading">
+    <table >
+        <tr class="thead">
+            <h2>{{city.name}}, {{city.country}}</h2>
+        </tr>
+        <tr class="body">
+            <td class="date">
+                <span >
+                    <p>{{currWeather.localTime | dateUpdate: 'D-M-Y'}}</p>
+                    <p>{{currWeather.localTime | dateUpdate: 'H-M-Z'}}</p>
+                </span>
+            </td>
+            <td class="img">
+                <img [src]="currWeather.icon.url | weatherIcon" [alt]="currWeather.icon.text">
+            </td>
+            <td class="txt">
+                <p *ngIf="isCelsius; else isFahr">
+                    {{currWeather.temperature.metric}}{{CEL_UNIT}} 
+                </p> 
+                <ng-template #isFahr>
+                    <p>{{currWeather.temperature.imperial}}{{FAR_UNIT}} </p>
+                </ng-template> 
+                <p>{{currWeather.icon.text}}</p>
+            </td>
+        </tr>
+    </table>
+    <ng-template #isLoading>
+        <mat-spinner></mat-spinner>>
+    </ng-template>
+    <mat-divider></mat-divider>
 </div>

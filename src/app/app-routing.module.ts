@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FavComponent } from './components/fav/fav/fav.component';
-import { HomeComponent } from './components/home/home/home.component';
 
 const routes: Routes = [
-  { path: "home", component: HomeComponent },
-  { path: "home/:id", component: HomeComponent },
-  { path: "fav", component: FavComponent  },
-  { path: "**", redirectTo: "home" }
+  { path: "home", loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)},
+  { path: "fav", loadChildren: () => import('./components/fav/fav.module').then(m => m.FavModule)},
+  { path: "**", pathMatch: "full", redirectTo: "home"},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

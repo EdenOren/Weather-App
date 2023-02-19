@@ -4,10 +4,10 @@
 }
 
 table, ng-template{
-    display: flex;
-    justify-content: center;
-    text-align: center;;
-    align-items: center;;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
 }
 .thead{
     display: flex;
@@ -18,29 +18,32 @@ table, ng-template{
     }
 }
 tr{
-    flex:1;
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 2fr 0.5fr;
+    grid-template-areas:
+    "date img"
+    "date txt";
 }
 td{
     display: flex;
     align-items: center;
     text-align: center;
 }    
-.date{
+.date, .txt{
+    grid-area: date;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-size: 16px;
 }
-.txt{
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    text-align: center;
-    align-items: center;
-}
+.date{ grid-area:date; font-size: 16px;}
+.txt{ grid-area:txt; font-size: 18px;}
+
 .img{
+    grid-area: img;
     margin:auto;
 }
 img{

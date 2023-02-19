@@ -7,8 +7,9 @@ import { ModesService } from 'src/app/services/modes.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit{
-  public logo='assets/images/logo.png'
+  public logo= 'assets/images/logo.png';
   public title= 'The Weather App';
 
   public isLight!: boolean;    //true represent dark theme, else light theme

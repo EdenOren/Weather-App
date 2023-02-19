@@ -2,7 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_KEY, URL_AUTOCOMPLETE, URL_CURRENT_WEATHER, URL_FORECAST_WEATHER, URL_LOCATION } from '../app-consts';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
+import { City } from '../models/city.model';
+import { CurrentWeather, ForecastWeather } from '../models/weather.model';
 
 /**
  * Interface for getRequest function to construct api url
@@ -28,7 +30,7 @@ export class AppService{
    * @param {getRequestParams} reqPar - parameters for api call
    * @returns {Observable} return data from api
    */
-  getRequest(reqPar: getRequestParams): Observable<any> {
+  getRequest(reqPar: getRequestParams): Observable<Response> {
     //add query if exist
     const q = reqPar._q;
     const params = new HttpParams (q? {fromObject: {apikey: API_KEY, q}}:{fromObject: {apikey: API_KEY}});
@@ -36,7 +38,7 @@ export class AppService{
     //add citykey if exist
     const cityKey = (reqPar._cityKey? reqPar._cityKey : ''); 
     
-    return this.http.get(reqPar._url + cityKey, {params}).pipe(shareReplay());
+    return this.http.get<Response>(reqPar._url + cityKey, {params});
   }
   /**
    * get location data from api based on given coordinates
@@ -44,9 +46,11 @@ export class AppService{
    * @param {number} longitude - desired location longitude
    * @returns {Observable} return location data
    */
-  getLocation(latitude: number, longitude: number): Observable<any> {
+  getLocation(latitude: number, longitude: number): Observable<City> {
     const url = URL_LOCATION;
-    return this.getRequest({_url: url, _q: `${latitude},${longitude}`});
+    return this.getRequest({_url: url, _q: `${latitude},${longitude}`}).pipe(
+      map((data)=> { return new City(data); })
+    );
   }
   /**
    * get autocomplete cities from api based on given string
@@ -62,9 +66,11 @@ export class AppService{
    * @param {number} key - city key
    * @returns {Observable} return current weather data
    */
-  getCurrentConditions(key: number): Observable<any> {
+  getCurrentConditions(key: number): Observable<CurrentWeather> {
     const url = URL_CURRENT_WEATHER;
-    return this.getRequest({_url: url, _cityKey: `${key}`});
+    return this.getRequest({_url: url, _cityKey: `${key}`}).pipe(
+      map((data)=> { return new CurrentWeather(data); })
+    )
   }
   /**
    * get next 5 days weather conditions of city based on given city key
