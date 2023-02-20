@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorIntercept } from './error.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 
 import { LayoutComponent } from './components/layout-area/layout/layout.component';
 import { HeaderComponent } from './components/layout-area/header/header.component';
 
-import { DatePipe } from '@angular/common';
-
 //mat modules
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -21,17 +20,16 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
+    AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
 
     //mat modules
     MatIconModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
-  providers: [DatePipe],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true}],
   bootstrap: [LayoutComponent]
 })
-export class AppModule { }
+export class AppModule {}

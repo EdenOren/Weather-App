@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { City } from 'src/app/models/city.model';
 import { ForecastWeather } from 'src/app/models/weather.model';
-import { CEL_UNIT_DISP, FAR_UNIT_DISP, FORECAST_DAYS } from 'src/app/app-consts';
+import { CEL_UNIT_DISP, FAR_UNIT_DISP } from 'src/app/app-consts';
 import { AppService } from 'src/app/services/app.service';
 import { ModesService } from 'src/app/services/modes.service';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-forecast',
@@ -16,9 +15,7 @@ export class ForecastComponent {
   @Input() city!:City;
   
   isCelsius!: boolean;
-  hasLoaded!: boolean;
-  forecast$!: Observable<ForecastWeather>;
-  foreWeather:ForecastWeather[] = []; // each element represents forecsat for the next 5 days
+  foreWeather:ForecastWeather[] = [];
 
   readonly FAR_UNIT = FAR_UNIT_DISP;
   readonly CEL_UNIT = CEL_UNIT_DISP;
@@ -26,28 +23,29 @@ export class ForecastComponent {
   constructor(private appServ: AppService, private mode: ModesService) { }
 
   ngOnInit() {
-    this.hasLoaded = false;
+    this.getWeathers();
   }
-  ngOnChanges() {
-    if (typeof this.city != 'undefined' ) {
-      this.getWeathers();
-    }
-  }
+  /**
+   * check user preference temperature unit 
+   */
   ngAfterContentChecked() {
     this.isCelsius = this.mode.getTemp();
   }
+
+  /**
+   * get and set forecast weather 
+   */
   getWeathers() {
-    this.forecast$ = this.appServ.get5DaysForecasts(this.city.key);
-    
     this.get5DaysWeather()
     .then((res) =>{
       this.set5DaysWeather(res);
     })
-    .catch((err) =>{
-      console.log(err);
-    })
   }
 
+  /**
+   * get 5 day forecast weather from api 
+   * @return {Promise} data from api
+   */
   async get5DaysWeather(): Promise<any> {
     try{
       const res = this.appServ.get5DaysForecasts(this.city.key);
@@ -56,12 +54,15 @@ export class ForecastComponent {
       return err;
     }
   }
-// 
+  /**
+   * set 5 day forecast weather to local variable 
+   * @param {any} data given weather data to set
+   */
   set5DaysWeather(data:any) {
-    for (let i = 0; i < FORECAST_DAYS; i++) {
-      this.foreWeather[i] = new ForecastWeather(data.DailyForecasts[i]); 
+    let forecasts = data.DailyForecasts;
+    for (let i = 0; i < forecasts.length; i++) {
+      this.foreWeather[i] = new ForecastWeather(forecasts[i]); 
     }
-    this.hasLoaded = true;
   }
 }
 

@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { City } from 'src/app/models/city.model';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-weather',
@@ -16,12 +18,16 @@ export class WeatherComponent{
   showCity!: City;  //city to show - routeCity if valid, inputCity otherwise
 
   cityNotFound: boolean = false; //given routeId exists, but city not found, equals true, false otherwise
+  notFoundString: string = "Could not load weather for this city";
 
-  constructor(private myActivatedRoute:ActivatedRoute, private favService: FavoritesService) { }
+  constructor(
+    private myActivatedRoute:ActivatedRoute,
+    private favService: FavoritesService,
+    private sbService: SnackbarService,
+  ) { }
 
   ngOnInit():void {
     this.deterInput();
-    this.setActiveCity();
   }
   ngOnChanges():void {
     this.setActiveCity();
@@ -30,7 +36,7 @@ export class WeatherComponent{
    * determines input city from input field or by url parameter
    */
   deterInput():void {
-    this.myActivatedRoute.paramMap.subscribe((params) => {
+    this.myActivatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
       const routeId = params.get('id');
       this.favCity = this.favService.getFavCity(routeId);
       if (routeId != null && this.favCity === undefined) { // if given routeid exist and city not found
@@ -65,8 +71,10 @@ export class WeatherComponent{
       city.isFav = !city.isFav;
       if (city.isFav) {
         this.favService.addFavorite(city);
+        this.sbService.sbSuccess(city.name + ' added to your favorites');
       } else {
         this.favService.removeFavorite(city);
+        this.sbService.sbSuccess(city.name + ' removed from your favorites');
       }
     }
   }

@@ -1,0 +1,39 @@
+.grow { 
+    transition: all 300ms ease-in-out; 
+}
+    
+.grow:hover { 
+    transform: scale(1.1); 
+}
+@keyframes beat{
+	to { transform: scale(0.9); }
+}
+@keyframes circle{
+    0%{
+        transform:rotate(0deg)
+                translate(0px)
+                rotate(0deg);
+
+    }
+    25%{
+        transform:rotate(90deg)
+                translate(-5px)
+                rotate(-90deg);
+
+    }
+    50%{
+        transform:rotate(180deg)
+                translate(-5px)
+                rotate(-180deg);
+    }
+    75%{
+        transform:rotate(270deg)
+                translate(-5px)
+                rotate(-270deg);
+    }
+    100%{
+        transform:rotate(360deg)
+                translate(0px)
+                rotate(-360deg);
+    }
+}

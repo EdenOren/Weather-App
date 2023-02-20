@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * This pipe is used to highlight text in given string.
+ * @param {string} text given string to be searched
+ * @param {any} search text to be highlighted
+ * @returns {string} text with highlighted words
+ */
 @Pipe({
   name: 'highlight'
 })
 export class HighlightPipe implements PipeTransform {
-/**
- * This pipe is used to highlight text in a string.
- * @param {string} text text to be searched
- * @param {any} search text to be highlighted
- * @returns {string} text with highlighted words
- */
   transform(text: string, search:any): string {
     const pattern = search
       .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")

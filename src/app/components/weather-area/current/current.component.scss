@@ -5,43 +5,48 @@
 
 table, ng-template{
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: center;
-}
-.thead{
     display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    h2{
-        padding-right: 1rem;
-    }
+    padding: 0 2rem;
+    align-items: center;
 }
 tr{
     display: grid;
-    grid-template-columns: 2fr 2fr;
-    grid-template-rows: 2fr 0.5fr;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr 0.5fr;
     grid-template-areas:
-    "date img"
-    "date txt";
+    "title img"
+    "date txt"
+    ". . ";
 }
 td{
     display: flex;
     align-items: center;
     text-align: center;
-}    
-.date, .txt{
-    grid-area: date;
+} 
+.title{
+    grid-area: title;
     display: flex;
-    flex-wrap: wrap;
+    text-align: center;
+    justify-content: flex-start;
+}
+
+   
+.date{
+    grid-area:date;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+.txt{
+    grid-area:txt;
+    font-size: 18px;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 16px;
 }
-.date{ grid-area:date; font-size: 16px;}
-.txt{ grid-area:txt; font-size: 18px;}
-
 .img{
     grid-area: img;
     margin:auto;
@@ -51,7 +56,7 @@ img{
 }    
 
 @media only screen and (max-width: 600px) {
-    .thead{
+    .title{
         h2{
             font-size: 16px;
         }

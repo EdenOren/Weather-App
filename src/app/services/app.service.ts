@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_KEY, URL_AUTOCOMPLETE, URL_CURRENT_WEATHER, URL_FORECAST_WEATHER, URL_LOCATION } from '../app-consts';
-import { map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { City } from '../models/city.model';
-import { CurrentWeather, ForecastWeather } from '../models/weather.model';
+import { CurrentWeather } from '../models/weather.model';
+import { API_KEY, URL_AUTOCOMPLETE, URL_CURRENT_WEATHER, URL_FORECAST_WEATHER, URL_LOCATION } from '../app-consts';
+
 
 /**
  * Interface for getRequest function to construct api url
@@ -26,9 +27,9 @@ export class AppService{
   constructor(private http:HttpClient) { }
 
   /**
-   * create get request with params, return data from api
+   * create get request with params, to return data from api
    * @param {getRequestParams} reqPar - parameters for api call
-   * @returns {Observable} return data from api
+   * @returns {Observable} return Observable from api
    */
   getRequest(reqPar: getRequestParams): Observable<Response> {
     //add query if exist
@@ -69,8 +70,7 @@ export class AppService{
   getCurrentConditions(key: number): Observable<CurrentWeather> {
     const url = URL_CURRENT_WEATHER;
     return this.getRequest({_url: url, _cityKey: `${key}`}).pipe(
-      map((data)=> { return new CurrentWeather(data); })
-    )
+      map((data)=> { return new CurrentWeather(data); }))
   }
   /**
    * get next 5 days weather conditions of city based on given city key

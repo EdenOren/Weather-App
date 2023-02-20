@@ -1,7 +1,5 @@
-export const API_KEY = 'nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj';
-// GqPl8A6GYeygyiHg4PWldUNp7bF8tzqB - 0
-// dAUBWodgEZA5Qa5vAHBgqrDg0qr8GKMS - 2
-// nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj - 1
+export const API_KEY = 'nYJTu3GGeOqsqMszh59WyFdA3h4jJ8pj ';
+
 export const URL_LOCATION = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
 export const URL_AUTOCOMPLETE = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete';
 export const URL_CURRENT_WEATHER = 'http://dataservice.accuweather.com/currentconditions/v1/';
@@ -26,5 +24,4 @@ export const CEL_UNIT_DISP = 'C'
 export const TIMEOUT_LOCATION = 4000;
 export const DEBOUNCE_TIME_AUTO_COMPLETE = 500;
 
-export const FORECAST_DAYS = 5;
 export const FAVORITES = 'favorites';

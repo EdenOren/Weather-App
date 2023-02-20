@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({
- name: 'dateUpdate'
-})
-export class DateUpdatePipe implements PipeTransform {
 /**
  * This pipe is used to extract string date by format.
  * @param {string} date given full date as string
  * @param {string} format given date format
  * @returns {string} extracted format of given date
  */
+@Pipe({
+ name: 'dateUpdate'
+})
+export class DateUpdatePipe implements PipeTransform {
   transform(date: string, format: string): string | undefined {
     if (format === 'D-M-Y') {
       return date.substring(0, 4) + '-' + date.substring(5, 7) + '-' + date.substring(8, 10);

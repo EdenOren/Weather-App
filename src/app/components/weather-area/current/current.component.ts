@@ -52,3 +52,4 @@ export class CurrentComponent {
     this.currWeather$ = this.appServ.getCurrentConditions(this.city.key);
   }
 }
+

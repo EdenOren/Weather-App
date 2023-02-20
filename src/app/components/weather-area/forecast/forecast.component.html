@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="forecast" *ngIf='hasLoaded; isLoading'>
+    <div class="forecast" *ngIf='foreWeather'>
         <mat-card *ngFor="let forecast of foreWeather" class="grow">
             <mat-card-header>
                 <mat-card-title>
@@ -28,6 +28,3 @@
         </mat-card>
     </div>
 </div>
-<ng-template #isLoading>
-    <mat-spinner></mat-spinner>>
-</ng-template>

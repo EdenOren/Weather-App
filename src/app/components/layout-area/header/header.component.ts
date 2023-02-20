@@ -17,13 +17,13 @@ export class HeaderComponent implements OnInit{
 
   readonly FAR_UNIT = FAR_UNIT_DISP;
   readonly CEL_UNIT = CEL_UNIT_DISP;
+
   constructor(private mode:ModesService) { }
 
   ngOnInit() {
     this.getUserThemeMode();
-    this.toggleTheme();
-    
     this.getUserTempMode();
+    this.changeTheme();
   }
 
   //get user theme mode preference
@@ -33,24 +33,19 @@ export class HeaderComponent implements OnInit{
   //toggle temperature mode 
   toggleTempMode() {
     this.isCelsius = !this.isCelsius;
-    this.toggleTemp();
-  }
-  // change temp view fahrenheit/ celsius
-  toggleTemp() {
     this.mode.setTemp(this.isCelsius);
   }
-
   //get user theme mode preference
   getUserThemeMode() {
     this.isLight = this.mode.getTheme();
   }
   //toggle light/dark mode 
-  toggleDarkMode() {
+  toggleTheme() {
     this.isLight = !this.isLight;
-    this.toggleTheme();
+    this.changeTheme();
   }
   // change theme according to light/dark mode
-  toggleTheme() {
+  changeTheme() {
     const themeStr = this.mode.setTheme(this.isLight);
     document.documentElement.setAttribute('data-theme', themeStr);
   }

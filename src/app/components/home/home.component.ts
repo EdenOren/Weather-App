@@ -1,4 +1,4 @@
-import { Component, OnInit} from "@angular/core";
+import { Component} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged, filter, switchMap, take, timeout } 
 import { City } from "src/app/models/city.model";
 import { AppService } from "src/app/services/app.service";
 import { MIN_INPUT_CITY_NAME, DEFAULT_LAT, DEFAULT_LNG, TIMEOUT_LOCATION, DEBOUNCE_TIME_AUTO_COMPLETE } from "src/app/app-consts";
+import { SnackbarService } from "src/app/services/snackbar.service";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { MIN_INPUT_CITY_NAME, DEFAULT_LAT, DEFAULT_LNG, TIMEOUT_LOCATION, DEBOUN
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   matchHighlight: string = '';  //matching text to hightlight on drop-down
   selectedCity!: City;          // selected city from dropdown
   inputValue!: string;          
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   filterCities$!: Observable<any>;
   currentLocation$!: Observable<City>;
 
-  constructor(private appServ: AppService, private router: Router) { };
+  constructor(private appServ: AppService, private router: Router, private sbService: SnackbarService) { };
 
   ngOnInit() {
     this.getCurrentLocation();

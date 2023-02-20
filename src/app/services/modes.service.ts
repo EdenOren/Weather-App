@@ -1,7 +1,3 @@
-  /**
-   * get and set properties to and from local storage
-   * theme and temperature unit
-   */
 import { Injectable } from '@angular/core';
 import { CEL_UNIT, FAR_UNIT, DEFAULT_UNIT, DARK_THEME, DEFAULT_THEME, LIGHT_THEME } from '../app-consts';
 
@@ -45,7 +41,6 @@ export class ModesService {
     const strSet = celsius_unit? CEL_UNIT : FAR_UNIT;
     localStorage.setItem('unit', strSet);
   }
-
   /**
    * set user's preference theme in storage
    */

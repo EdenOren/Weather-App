@@ -1,4 +1,4 @@
-<div class="container dark-theme">
+<div class="container">
     <div class="logo"><a routerLink="/home"><img src={{logo}}></a></div>
     <div class="title"><a routerLink="/home"><h1>{{title}}</h1></a></div>
     <div class="links">
@@ -16,11 +16,11 @@
         <button mat-button matTooltip="Toggle temperature unit" (click)="toggleTempMode()">
             <span>{{isCelsius? CEL_UNIT : FAR_UNIT}}</span>
         </button>
-        <button *ngIf="isLight; else dark_mode" mat-button matTooltip="Switch to dark mode" (click)="toggleDarkMode()">
+        <button *ngIf="isLight; else dark_mode" mat-button matTooltip="Switch to dark mode" (click)="toggleTheme()">
             <mat-icon [ngStyle]="{color:'#000000'}">dark_mode</mat-icon>
         </button>
         <ng-template #dark_mode>
-            <button mat-button matTooltip="Switch to light mode" (click)="toggleDarkMode()">
+            <button mat-button matTooltip="Switch to light mode" (click)="toggleTheme()">
                 <mat-icon [ngStyle]="{color:'#FC7300'}">light_mode</mat-icon>
             </button>
         </ng-template>

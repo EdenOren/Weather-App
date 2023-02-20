@@ -7,5 +7,6 @@ import { WeatherModule } from './weather-area/weather/weather.module';
 @NgModule({
   imports: [CommonModule, WeatherModule, ForecastModule, CurrentModule],
   exports: [WeatherModule, ForecastModule, CurrentModule],
+  declarations: [],
 })
 export class SharedModule { }
