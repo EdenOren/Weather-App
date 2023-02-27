@@ -1,5 +1,22 @@
-<div class="container">
-    <table *ngIf="currWeather$ | async as currWeather">
+<div class="container" *ngIf="currWeather$ | async as currWeather; else noCityShowing">
+    <!-- add/remove to/from favorites section-->
+    <div class="fav" *ngIf="id == -1; else isFavoriteList">
+        <span (click)="toggleFav(city)">
+            <mat-icon *ngIf="!city.isFav; else isFavorite" matTooltip="Add {{city.name}} to Favorites" color="warn">
+                favorite_border
+            </mat-icon>
+        </span>
+        <ng-template #isFavorite>
+            <mat-icon matTooltip="Remove {{city.name}} from Favorites" color="warn">favorite</mat-icon>
+        </ng-template>
+    </div>
+    <ng-template #isFavoriteList>
+        <div class="idnum">
+            <p>#{{id}}</p>
+        </div>
+    </ng-template>
+    <!-- current weather section-->
+    <table>
         <tr class="body">
             <td class="title">
                 <h2>{{city.name}}, {{city.country}}</h2>
@@ -26,3 +43,6 @@
     </table>
     <mat-divider></mat-divider>
 </div>
+<ng-template #noCityShowing>
+    <mat-spinner></mat-spinner>
+</ng-template>

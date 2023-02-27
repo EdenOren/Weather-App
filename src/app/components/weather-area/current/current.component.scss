@@ -1,8 +1,21 @@
 .container{
     width: 100%;
     margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "fav tble";
 }
+.fav, .idnum{
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    grid-area: fav;
+    mat-icon{
 
+        cursor: pointer;
+    }
+}
+table { grid-area:tble;}
 table, ng-template{
     width: 100%;
     display: flex;

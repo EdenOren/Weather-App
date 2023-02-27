@@ -11,8 +11,8 @@
             <mat-card-content>
                 <p class="txt">{{forecast.day.text}}</p>
                 <p class="temp">
-                    {{isCelsius? ((forecast.temperature.maxVal | temperature: CEL_UNIT) + CEL_UNIT)
-                    : ((forecast.temperature.maxVal) + FAR_UNIT)}} 
+                    {{isCelsius? ((forecast.temperature.maxVal | temperature: CEL_UNIT_DISPLAY))
+                    : ((forecast.temperature.maxVal) + FAR_UNIT_DISPLAY)}} 
                 </p>
                 <img mat-card-image [src]="forecast.day.url | weatherIcon" [alt]="forecast.day.text">
             </mat-card-content>
@@ -20,8 +20,8 @@
             <mat-card-content>
                 <p class="txt">{{forecast.night.text}}</p>
                 <p class="temp">
-                    {{isCelsius? ((forecast.temperature.minVal | temperature: CEL_UNIT) + CEL_UNIT)
-                    : ((forecast.temperature.minVal) + FAR_UNIT)}} 
+                    {{isCelsius? ((forecast.temperature.minVal | temperature: CEL_UNIT_DISPLAY))
+                    : ((forecast.temperature.minVal) + FAR_UNIT_DISPLAY)}} 
                 </p>
                 <img mat-card-image [src]="forecast.night.url | weatherIcon" [alt]="forecast.night.text">
             </mat-card-content>

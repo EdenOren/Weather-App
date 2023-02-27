@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { LayoutComponent } from './components/layout-area/layout/layout.component';
 import { HeaderComponent } from './components/layout-area/header/header.component';
+import { Page404Component } from './components/page404/page404.component';
 
 //mat modules
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     LayoutComponent,
     HeaderComponent,
+    Page404Component,
   ],
   imports: [
     BrowserModule,

@@ -17,8 +17,8 @@ export class ForecastComponent {
   isCelsius!: boolean;
   foreWeather:ForecastWeather[] = [];
 
-  readonly FAR_UNIT = FAR_UNIT_DISP;
-  readonly CEL_UNIT = CEL_UNIT_DISP;
+  readonly FAR_UNIT_DISPLAY = FAR_UNIT_DISP;
+  readonly CEL_UNIT_DISPLAY = CEL_UNIT_DISP;
 
   constructor(private appServ: AppService, private mode: ModesService) { }
 

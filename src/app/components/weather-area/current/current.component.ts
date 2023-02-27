@@ -6,6 +6,7 @@ import { AppService } from 'src/app/services/app.service';
 import { ModesService } from 'src/app/services/modes.service';
 import { CEL_UNIT_DISP, FAR_UNIT_DISP } from 'src/app/app-consts';
 import { Observable } from 'rxjs';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-current',
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class CurrentComponent {
   @Input() city!:City;
+  @Input() id!:number; // id -1: show add to favorites option. else show city favorite id.
   
   isCelsius!: boolean;
   currWeather$!: Observable<CurrentWeather>;
@@ -23,6 +25,7 @@ export class CurrentComponent {
 
   constructor(
     private favService: FavoritesService,
+    private sbService: SnackbarService,
     private appServ: AppService,
     private mode: ModesService
   ) { }
@@ -50,6 +53,24 @@ export class CurrentComponent {
    */
   getWeathers() {
     this.currWeather$ = this.appServ.getCurrentConditions(this.city.key);
+  }
+  /**
+   * add / remove city form favorites 
+   * @param {City} city city to be added or removed
+   */
+  toggleFav(city: City):void {
+    if (this.city != null) {
+      if (city.key === this.city.key) {
+        city.isFav = !city.isFav;
+        if (city.isFav) {
+          this.favService.addFavorite(city);
+          this.sbService.sbSuccess(city.name + ' added to your favorites');
+        } else {
+          this.favService.removeFavorite(city);
+          this.sbService.sbSuccess(city.name + ' removed from your favorites');
+        }
+      }
+    }
   }
 }
 

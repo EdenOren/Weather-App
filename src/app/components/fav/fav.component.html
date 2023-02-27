@@ -9,9 +9,8 @@
         </div>
         <!-- show favorite list -->
         <div class="favorites" *ngFor="let item of favorites; index as id">
-            <p>#{{id}}</p>
             <a [routerLink]="['../home/', id]" matTooltip="Click to show {{item.city.name}} full weather details">
-                <app-current [city]="item.city"></app-current>
+                <app-current [city]="item.city" [id]="id"></app-current>
             </a>
             <span (click)="removeFavorite(item.city)">
                 <mat-icon matTooltip="Remove {{item.city.name}} from Favorites" color="warn">
