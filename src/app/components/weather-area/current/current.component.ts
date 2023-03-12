@@ -40,6 +40,7 @@ export class CurrentComponent {
     if (typeof this.city != 'undefined' ) {
       this.city.isFav = (this.favService.getFavId(this.city) != null)? true : false;
     }
+    this.getWeathers();
   }
   /**
    * check and update temperature unit

@@ -25,6 +25,9 @@ export class ForecastComponent {
   ngOnInit() {
     this.getWeathers();
   }
+  ngOnChanges() {
+    this.getWeathers();
+  }
   /**
    * check user preference temperature unit 
    */
